@@ -57,8 +57,6 @@ public:
 		cout << endl;
 	}
 	
-
-
 	void push_back(const T& val) {
 
 		if (currentSize >= currentCapacity) {
@@ -92,6 +90,8 @@ private:
 		if (newCapacity > currentCapacity) {
 			currentCapacity = newCapacity;
 			//T* newArr = SimpleVector(*this).data; //heap 손상 에러
+			// 임시 객체가 소멸할 때 소멸자가 호출되어 newArr가 가리키는 메모리가 해제됨
+			// 이 후 data = newArr;에서 해제된 메모리를 가리키며 힙 손상 발생
 			T* newArr = new T[currentCapacity];
 			for (int i = 0; i < currentSize; i++) {
 				newArr[i] = data[i];
