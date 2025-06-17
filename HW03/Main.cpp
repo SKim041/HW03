@@ -4,6 +4,9 @@
 
 int main()
 {
+	// 이 코드 이후에 힙 메모리 누수를 감지하는 코드
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	int capacity = 11;
 	SimpleVector<char> sv(capacity);
 	cout << "Current Capacity: " << sv.capacity() << endl;

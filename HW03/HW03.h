@@ -33,9 +33,19 @@ public:
 	~SimpleVector() {
 		cout << "메모리 해제" << endl;
 		delete[] data;
+		data = nullptr;
 	};
 
+	//// 연산자 오버로딩
+	//T& operator[](int index) {
+	//	return data[index];
+	//}
+
 	// 복사 생성자
+	// 기존의 객체로 복사 생성
+	// 얕은 복사를 하여 data의 주소만 가져올 경우 
+	// 기존 객체의 data를 delete하면 복사한 객체의 data는 유효하지 않은 주소를 가리키고 
+	// 이것을 delete하면 에러 발생
 	SimpleVector(const SimpleVector& other) 
 		:currentCapacity(other.currentCapacity), currentSize(other.currentSize) {
 		data = new T[currentCapacity];
@@ -73,12 +83,12 @@ public:
 			cout << "원소 없음" << endl;
 		}
 	}
-
-	int size() {
+	// 내부에서 변수를 수정하지 않으면  const  붙이기
+	int size() const {
 		return currentSize;
 	}
 
-	int capacity() {
+	int capacity() const {
 		return currentCapacity;
 	}
 
